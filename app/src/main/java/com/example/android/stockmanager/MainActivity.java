@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.example.android.stockmanager.data.ManagerDbHelper;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String LOG_TAG = MainActivity.class.getSimpleName();
     private ManagerDbHelper managerDbHelper;
 
     @Override
@@ -70,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 null,               // Don't filter by row groups
                 null);             // Sort order
 
-        //DisplayView used for testing reasons
         TextView displayView = findViewById(R.id.book_text_view);
 
         try {
@@ -134,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
             cursor.close();
         }
     }
-
     public void insertBook() {
         // Gets the database in write mode
         SQLiteDatabase db = managerDbHelper.getWritableDatabase();
@@ -154,5 +154,7 @@ public class MainActivity extends AppCompatActivity {
         values.put(ManagerEntry.COLUMN_BOOK_SUPPLIER_NAME, "Supplier");
         values.put(ManagerEntry.COLUMN_BOOK_SUPPLIER_PHONE_NUMBER, 863838484);
 
+        long newRowId = db.insert(ManagerEntry.TABLE_NAME, null, values);
+        Log.v(LOG_TAG, "Number of entry rows: " + newRowId);
     }
 }
