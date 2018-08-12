@@ -20,7 +20,7 @@ public final class BookContract {
     private BookContract() {
     }
 
-    public static final class ManagerEntry implements BaseColumns {
+    public static final class BookEntry implements BaseColumns {
 
         /**
          * The content URI to access the book's data in the provider
