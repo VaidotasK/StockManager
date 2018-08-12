@@ -5,6 +5,9 @@ import android.provider.BaseColumns;
 
 public final class BookContract {
 
+    private BookContract() {
+    }
+
     public static final String CONTENT_AUTHORITY = "com.example.android.stockmanager";
     /**
      * Constant CONTENT_AUTHORITY is framework  of URI's which app will use to reach
@@ -17,8 +20,6 @@ public final class BookContract {
      */
     public static final String PATH_BOOKS = "books";
 
-    private BookContract() {
-    }
 
     public static final class BookEntry implements BaseColumns {
 
