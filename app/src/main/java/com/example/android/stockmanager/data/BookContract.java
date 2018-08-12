@@ -1,13 +1,31 @@
 package com.example.android.stockmanager.data;
 
+import android.net.Uri;
 import android.provider.BaseColumns;
 
-public final class ManagerContract {
+public final class BookContract {
 
-    private ManagerContract() {
+    public static final String CONTENT_AUTHORITY = "com.example.android.stockmanager";
+    /**
+     * Constant CONTENT_AUTHORITY is framework  of URI's which app will use to reach
+     * content provider
+     */
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    /**
+     * Data type, for content provider uri(appended to {@link #BASE_CONTENT_URI}
+     * ex. content://com.example.android.stockmanager/books/
+     */
+    public static final String PATH_BOOKS = "books";
+
+    private BookContract() {
     }
 
     public static final class ManagerEntry implements BaseColumns {
+
+        /**
+         * The content URI to access the book's data in the provider
+         */
+        public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_BOOKS);
 
         /**
          * Name of table
