@@ -119,6 +119,23 @@ public class BookProvider extends ContentProvider {
         // Get writable database
         SQLiteDatabase db = bookDbHelper.getWritableDatabase();
 
+        // Take value of every column and store in new variables, then check if they are valid
+        String author = values.getAsString(BookEntry.COLUMN_BOOK_AUTHOR);
+        String productName = values.getAsString(BookEntry.COLUMN_BOOK_PRODUCT_NAME);
+        Integer year = values.getAsInteger(BookEntry.COLUMN_BOOK_PUBLICATION_YEAR);
+        String language = values.getAsString(BookEntry.COLUMN_BOOK_LANGUAGE);
+        Integer type = values.getAsInteger(BookEntry.COLUMN_BOOK_TYPE);
+        Integer price = values.getAsInteger(BookEntry.COLUMN_BOOK_PRICE);
+        Integer quantity = values.getAsInteger(BookEntry.COLUMN_BOOK_QUANTITY);
+        Integer availability = values.getAsInteger(BookEntry.COLUMN_BOOK_AVAILABILITY);
+        String supplierName = values.getAsString(BookEntry.COLUMN_BOOK_SUPPLIER_NAME);
+        Integer supplierPhone = values.getAsInteger(BookEntry.COLUMN_BOOK_SUPPLIER_PHONE_NUMBER);
+
+        //TODO fill validation closes
+        if (author == null) {
+            throw new IllegalArgumentException("Book requires an author");
+        }
+
         // Insert the new book with the given values
         long id = db.insert(BookEntry.TABLE_NAME, null, values);
 
@@ -137,18 +154,87 @@ public class BookProvider extends ContentProvider {
         return ContentUris.withAppendedId(uri, id);
     }
 
+    /**
+     * Updates the data at the given selection and selection arguments, with the new ContentValues.
+     */
+    @Override
+    public int update(Uri uri, ContentValues contentValues, String selection,
+                      String[] selectionArgs) {
+        final int match = uriMatcher.match(uri);
+        switch (match) {
+            case BOOKS:
+                return updateBook(uri, contentValues, selection, selectionArgs);
+            case BOOK_ID:
+                // For the BOOK_ID code, extract out the ID from the URI,
+                // so we know which row to update. Selection will be "_id=?" and selection
+                // arguments will be a String array containing the actual ID.
+                selection = BookEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return updateBook(uri, contentValues, selection, selectionArgs);
+            default:
+                throw new IllegalArgumentException("Update is not supported for " + uri);
+        }
+    }
+
+    /**
+     * Update books in the database with the given content values. Apply the changes to the rows
+     * specified in the selection and selection arguments (which could be 0 or 1 or more books).
+     * Return the number of rows that were successfully updated.
+     */
+    private int updateBook(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+
+        // If there are no values to update, then don't try to update the database
+        if (values.size() == 0) {
+            return 0;
+        }
+
+        //TODO do all the sanity checks
+        // If the {@link BookEntry#COLUMN_BOOK_AUTHOR} key is present,
+        // check that the name value is not null.
+        if (values.containsKey(BookEntry.COLUMN_BOOK_AUTHOR)) {
+            String name = values.getAsString(BookEntry.COLUMN_BOOK_AUTHOR);
+            if (name == null) {
+                throw new IllegalArgumentException("Book requires author");
+            }
+        }
+
+
+        // Otherwise, get writable database to update the data
+        SQLiteDatabase db = bookDbHelper.getWritableDatabase();
+
+        // Returns the number of database rows affected by the update statement
+        return db.update(BookEntry.TABLE_NAME, values, selection, selectionArgs);
+    }
+
+    @Override
+    public int delete(Uri uri, String selection, String[] selectionArgs) {
+
+        SQLiteDatabase db = bookDbHelper.getWritableDatabase();
+        final int match = uriMatcher.match(uri);
+        switch (match) {
+            case BOOKS:
+                return db.delete(BookEntry.TABLE_NAME, selection, selectionArgs);
+            case BOOK_ID:
+                selection = BookEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return db.delete(BookEntry.TABLE_NAME, selection, selectionArgs);
+            default:
+                throw new IllegalArgumentException("Delete is not supported for " + uri);
+        }
+    }
+
     @Override
     public String getType(Uri uri) {
-        return null;
+        final int match = uriMatcher.match(uri);
+        switch (match) {
+            case BOOKS:
+                return BookEntry.CONTENT_LIST_TYPE;
+            case BOOK_ID:
+                return BookEntry.CONTENT_ITEM_TYPE;
+            default:
+                throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
+        }
     }
 
-    @Override
-    public int delete(Uri uri, String s, String[] strings) {
-        return 0;
-    }
 
-    @Override
-    public int update(Uri uri, ContentValues contentValues, String s, String[] strings) {
-        return 0;
-    }
 }
