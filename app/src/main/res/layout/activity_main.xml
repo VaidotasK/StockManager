@@ -1,41 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
+    <ListView
+        android:id="@+id/list_view_books"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:text="UI is for testing only"
-        android:textColor="@android:color/black"
-        android:textSize="24sp" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/button_add_book"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add book" />
-
-        <Button
-            android:id="@+id/button_display"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="display" />
-
-    </LinearLayout>
-    <TextView
-        android:id="@+id/book_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Query info" />
-
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/menu_main_white" />
+</RelativeLayout>
