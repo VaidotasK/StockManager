@@ -60,7 +60,7 @@ public final class BookContract {
         public static final String COLUMN_BOOK_LANGUAGE = "language";
 
         /**
-         * Possible values {@link #TYPE_KINDLE}, {@link #TYPE_POCKET}, {@link #TYPE_STANDARD};
+         * Possible values {@link #TYPE_E_BOOK}, {@link #TYPE_POCKET}, {@link #TYPE_STANDARD};
          */
         public static final String COLUMN_BOOK_TYPE = "type";
         public static final String COLUMN_BOOK_PRICE = "price";
@@ -72,15 +72,33 @@ public final class BookContract {
         /**
          * Constants for different book types
          */
-        public static final int TYPE_KINDLE = 0;
+        public static final int TYPE_STANDARD = 0;
         public static final int TYPE_POCKET = 1;
-        public static final int TYPE_STANDARD = 2;
+        public static final int TYPE_E_BOOK = 2;
 
         /**
          * Constants for availability
          */
-        public static final int AVAILABILITY_IN_STOCK = 1;
-        public static final int AVAILABILITY_OUT_OF_STOCK = 0;
+        public static final int AVAILABILITY_NOT_AVAILABLE = 0;
+        public static final int AVAILABILITY_AVAILABLE = 1;
+
+
+        /**
+         * Returns whether or not the given type is {@link #TYPE_STANDARD}, {@link #TYPE_POCKET},
+         * or {@link #TYPE_E_BOOK}.
+         */
+        public static boolean isValidType(int type) {
+            return type == TYPE_STANDARD || type == TYPE_POCKET || type == TYPE_E_BOOK;
+        }
+
+        /**
+         * Returns whether or not the given availability is {@link #AVAILABILITY_NOT_AVAILABLE},
+         * {@link #AVAILABILITY_AVAILABLE}.
+         */
+        public static boolean isValidAvailability(int availability) {
+            return availability == AVAILABILITY_NOT_AVAILABLE ||
+                    availability == AVAILABILITY_AVAILABLE;
+        }
 
     }
 }
