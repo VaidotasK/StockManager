@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Stock Manager</string>
+
+    <!--Strings for array of spinner Type options -->
+    <string name="type_standard_book">Standard book</string>
+    <string name="type_pocket_book">Pocket book</string>
+    <string name="type_e_book">E-book</string>
+
+    <!--Strings for array of spinner Availability options -->
+    <string name="availability_available">Available</string>
+    <string name="availability_not_available">Not available</string>
+
 </resources>
