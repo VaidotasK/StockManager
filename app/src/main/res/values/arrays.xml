@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="array_product_type_spinner_options">
+        <item>@string/type_standard_book</item>
+        <item>@string/type_pocket_book</item>
+        <item>@string/type_e_book</item>
+    </string-array>
+
+    <string-array name="array_availability_spinner_options">
+        <item>@string/availability_available</item>
+        <item>@string/availability_not_available</item>
+    </string-array>
+</resources>
