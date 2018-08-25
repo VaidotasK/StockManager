@@ -27,26 +27,26 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/editor_author_text_view"
+                    android:id="@+id/editor_author_edit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="Author" />
 
                 <EditText
-                    android:id="@+id/editor_product_name_text_view"
+                    android:id="@+id/editor_product_name_edit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="Product name" />
 
                 <EditText
-                    android:id="@+id/editor_year_text_view"
+                    android:id="@+id/editor_year_edit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="Publication year"
                     android:inputType="number" />
 
                 <EditText
-                    android:id="@+id/editor_language_text_view"
+                    android:id="@+id/editor_language_edit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="Language" />
@@ -62,10 +62,9 @@
                         android:text="Type:" />
 
                     <Spinner
-                        android:id="@+id/editor_type_text_view"
-                        android:layout_width="0dp"
+                        android:id="@+id/editor_type_spinner"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
                         android:spinnerMode="dropdown" />
                 </LinearLayout>
 
@@ -75,18 +74,20 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/decrement_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="-" />
 
                     <EditText
-                        android:id="@+id/editor_quantity_text_view"
+                        android:id="@+id/editor_quantity_edit_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="Quantity"
                         android:inputType="number" />
 
                     <Button
+                        android:id="@+id/increment_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="+" />
@@ -106,7 +107,7 @@
                 android:text="Price" />
 
             <EditText
-                android:id="@+id/editor_price_text_view"
+                android:id="@+id/editor_price_edit_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
@@ -127,7 +128,7 @@
                 android:text="Availability" />
 
             <Spinner
-                android:id="@+id/editor_availability_text_view"
+                android:id="@+id/editor_availability_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
@@ -153,13 +154,13 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/editor_supplier_name_text_view"
+                    android:id="@+id/editor_supplier_name_edit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="Supplier name" />
 
                 <EditText
-                    android:id="@+id/editor_supplier_phone_text_view"
+                    android:id="@+id/editor_supplier_phone_edit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="Supplier phone number"
@@ -169,6 +170,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/call_supplier_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Call Supplier" />
