@@ -53,4 +53,13 @@
     <string name="button_text_call_supplier">Call Supplier</string>
     <string name="button_text_sale">Sale</string>
 
+    <string name="error_msg_while_inserting_book">Error while saving book</string>
+    <string name="msg_out_of_stock">Book is out of Stock</string>
+    <string name="msg_fill_all_data">Please fill in all the details</string>
+    <string name="msg_enter_valid_year">Enter valid year, between 1500-2050</string>
+    <string name="msg_insert_successful">Book was inserted successfully</string>
+    <string name="error_msg_while_updating">Error with updating book</string>
+    <string name="msg_update_successful">Update was successful</string>
+    <string name="msg_book_bacame_out_of_stock">Book became out of stock</string>
+
 </resources>
