@@ -1,54 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_item_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/background_text"
     android:orientation="horizontal"
-    android:paddingBottom="4dp">
+    android:paddingBottom="@dimen/padOrMar_XS">
 
     <TextView
         android:id="@+id/list_view_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:text="Price" />
+        style="@style/TextViewBasic"
+        android:layout_width="@dimen/otherSize_XL"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="@dimen/textSize_M"
+        tools:text="10 Eur" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/padOrMar_0"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/list_view_product_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Product name" />
+            style="@style/TextViewBasic"
+            android:textSize="@dimen/textSize_L"
+            tools:text="Product name" />
 
         <TextView
             android:id="@+id/list_view_author"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Author" />
+            style="@style/TextViewBasic"
+            android:textSize="@dimen/textSize_M"
+            tools:text="Author" />
 
         <TextView
             android:id="@+id/list_view_publishing_year"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Publishing year" />
+            style="@style/TextViewBasic"
+            android:textSize="@dimen/textSize_XS"
+            tools:text="Publishing year" />
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/list_view_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:text="Quantity" />
+        style="@style/TextViewBasic"
+        android:layout_gravity="center_vertical"
+        android:padding="@dimen/padOrMar_XXL"
+        android:textSize="@dimen/textSize_M"
+        tools:text="Quantity" />
 
     <Button
         android:id="@+id/list_view_sale_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sale" />
+        android:layout_width="@dimen/otherSize_L"
+        android:layout_height="@dimen/otherSize_M"
+        android:layout_gravity="center_vertical"
+        android:background="@color/background_button"
+        android:focusable="false"
+        android:text="@string/button_text_sale" />
 
 </LinearLayout>
