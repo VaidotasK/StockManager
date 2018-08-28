@@ -143,7 +143,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padOrMar_M"
-            android:background="@color/button_background"
+            android:background="@color/background_button"
             android:onClick="makePhoneCall"
             android:padding="@dimen/padOrMar_M"
             android:text="@string/button_text_call_supplier" />

@@ -6,14 +6,7 @@ import android.provider.BaseColumns;
 
 public final class BookContract {
 
-    private BookContract() {
-    }
-
     public static final String CONTENT_AUTHORITY = "com.example.android.stockmanager";
-    /**
-     * Constant CONTENT_AUTHORITY is framework  of URI's which app will use to reach
-     * content provider
-     */
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     /**
      * Data type, for content provider uri(appended to {@link #BASE_CONTENT_URI}
@@ -21,6 +14,8 @@ public final class BookContract {
      */
     public static final String PATH_BOOKS = "books";
 
+    private BookContract() {
+    }
 
     public static final class BookEntry implements BaseColumns {
 
@@ -34,21 +29,13 @@ public final class BookContract {
          */
         public static final String CONTENT_LIST_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_BOOKS;
-
         /**
          * The MIME type of the {@link #CONTENT_URI} for a single book.
          */
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_BOOKS;
 
-        /**
-         * Name of table
-         */
         public static final String TABLE_NAME = "books";
-
-        /**
-         * Entries ID
-         */
         public static final String _ID = BaseColumns._ID;
 
         /**
@@ -82,23 +69,6 @@ public final class BookContract {
         public static final int AVAILABILITY_NOT_AVAILABLE = 0;
         public static final int AVAILABILITY_AVAILABLE = 1;
 
-
-        /**
-         * Returns whether or not the given type is {@link #TYPE_STANDARD}, {@link #TYPE_POCKET},
-         * or {@link #TYPE_E_BOOK}.
-         */
-        public static boolean isValidType(int type) {
-            return type == TYPE_STANDARD || type == TYPE_POCKET || type == TYPE_E_BOOK;
-        }
-
-        /**
-         * Returns whether or not the given availability is {@link #AVAILABILITY_NOT_AVAILABLE},
-         * {@link #AVAILABILITY_AVAILABLE}.
-         */
-        public static boolean isValidAvailability(int availability) {
-            return availability == AVAILABILITY_NOT_AVAILABLE ||
-                    availability == AVAILABILITY_AVAILABLE;
-        }
 
     }
 }
