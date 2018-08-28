@@ -8,7 +8,8 @@
     </string-array>
 
     <string-array name="array_availability_spinner_options">
-        <item>@string/availability_available</item>
         <item>@string/availability_not_available</item>
+        <item>@string/availability_available</item>
+
     </string-array>
 </resources>
