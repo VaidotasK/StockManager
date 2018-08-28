@@ -10,55 +10,28 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.android.stockmanager.R;
 import com.example.android.stockmanager.data.BookContract.BookEntry;
 
 
 /**
- * {@link ContentProvider} for Pets app.
+ * {@link ContentProvider} for Book app.
  */
 public class BookProvider extends ContentProvider {
 
-    /**
-     * Tag for the log messages
-     */
     public static final String LOG_TAG = BookProvider.class.getSimpleName();
-
-    //TODO add int constants for matching uri 
-    /**
-     * URI matcher code for the content URI for the pets table
-     */
     private static final int BOOKS = 100;
-
-    /**
-     * URI matcher code for the content URI for a single pet in the pets table
-     */
     private static final int BOOK_ID = 101;
 
-    /**
-     * UriMatcher object to match a content URI to a corresponding code.
-     * The input passed into the constructor represents the code to return for the root URI.
-     * It's common to use NO_MATCH as the input for this case.
-     */
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
-    // Static initializer. This is run the first time anything is called from this class.
+
     static {
-        // The calls to addURI() go here, for all of the content URI patterns that the provider
-        // should recognize. All paths added to the UriMatcher have a corresponding code to return
-        // when a match is found.
-
-        //TODO add uris
         uriMatcher.addURI(BookContract.CONTENT_AUTHORITY, BookContract.PATH_BOOKS, BOOKS);
-
         uriMatcher.addURI(BookContract.CONTENT_AUTHORITY, BookContract.PATH_BOOKS + "/#", BOOK_ID);
-
     }
 
-    /**
-     * Database helper object
-     */
     private BookDbHelper bookDbHelper;
-
 
     @Override
     public boolean onCreate() {
@@ -70,10 +43,7 @@ public class BookProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
                         String sortOrder) {
         SQLiteDatabase db = bookDbHelper.getReadableDatabase();
-
-        // Cursor will hold result of the query
         Cursor cursor;
-
         // Match uri to specific code, if not found throw an exception
         int match = uriMatcher.match(uri);
         switch (match) {
@@ -85,8 +55,6 @@ public class BookProvider extends ContentProvider {
             case BOOK_ID:
                 //For every ? mark we need to prepare 1 String in selectionArgs
                 selection = BookEntry._ID + "=?";
-                // From last path's part takes ID and stores in string array.
-                // For WHERE selection = value, where value is string from StringArray (selectionArgs)
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
 
                 // This will perform a query on the books table with specific ID number
@@ -118,49 +86,25 @@ public class BookProvider extends ContentProvider {
     }
 
     /**
-     * Insert a book into the database with the given content values. Return the new content URI
+     * Insert a book into the database with the given content values. Return new content URI
      * for that specific row in the database.
      */
     private Uri insertBook(Uri uri, ContentValues values) {
-        // Get writable database
         SQLiteDatabase db = bookDbHelper.getWritableDatabase();
-
-        // Take value of every column and store in new variables, then check if they are valid
-        String author = values.getAsString(BookEntry.COLUMN_BOOK_AUTHOR);
-        String productName = values.getAsString(BookEntry.COLUMN_BOOK_PRODUCT_NAME);
-        Integer year = values.getAsInteger(BookEntry.COLUMN_BOOK_PUBLICATION_YEAR);
-        String language = values.getAsString(BookEntry.COLUMN_BOOK_LANGUAGE);
-        Integer type = values.getAsInteger(BookEntry.COLUMN_BOOK_TYPE);
-        Integer price = values.getAsInteger(BookEntry.COLUMN_BOOK_PRICE);
-        Integer quantity = values.getAsInteger(BookEntry.COLUMN_BOOK_QUANTITY);
-        Integer availability = values.getAsInteger(BookEntry.COLUMN_BOOK_AVAILABILITY);
-        String supplierName = values.getAsString(BookEntry.COLUMN_BOOK_SUPPLIER_NAME);
-        Integer supplierPhone = values.getAsInteger(BookEntry.COLUMN_BOOK_SUPPLIER_PHONE_NUMBER);
-
-        //TODO fill validation closes
-        if (author == null) {
-            throw new IllegalArgumentException("Book requires an author");
-        }
-
         // Insert the new book with the given values
         long id = db.insert(BookEntry.TABLE_NAME, null, values);
 
         // Show a toast message depending on whether or not the insertion was successful
         if (id == -1) {
-            // If the row ID is -1, then there was an error with insertion.
             Log.e(LOG_TAG, "Failed to insert row for " + uri);
-            Toast.makeText(getContext(), "Error with saving book", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.error_msg_while_inserting_book, Toast.LENGTH_SHORT).show();
             return null;
         } else {
-            // Notify all listeners that the data has changed for the pet content URI
+            // Notify all listeners that the data has changed for the book content URI
             if (null != getContext()) {
                 getContext().getContentResolver().notifyChange(uri, null);
             }
-            // Otherwise, the insertion was successful and we can display a toast with the row ID.
-            Toast.makeText(getContext(), "Book was saved", Toast.LENGTH_SHORT).show();
         }
-        // Once we know the ID of the new row in the table,
-        // return the new URI with the ID appended to the end of it
         return ContentUris.withAppendedId(uri, id);
     }
 
@@ -175,9 +119,6 @@ public class BookProvider extends ContentProvider {
             case BOOKS:
                 return updateBook(uri, contentValues, selection, selectionArgs);
             case BOOK_ID:
-                // For the BOOK_ID code, extract out the ID from the URI,
-                // so we know which row to update. Selection will be "_id=?" and selection
-                // arguments will be a String array containing the actual ID.
                 selection = BookEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateBook(uri, contentValues, selection, selectionArgs);
@@ -187,29 +128,14 @@ public class BookProvider extends ContentProvider {
     }
 
     /**
-     * Update books in the database with the given content values. Apply the changes to the rows
-     * specified in the selection and selection arguments (which could be 0 or 1 or more books).
-     * Return the number of rows that were successfully updated.
+     * Update book in database
      */
     private int updateBook(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 
-        // If there are no values to update, then don't try to update the database
+        // Check if there are values, if not, don't try to update the database
         if (values.size() == 0) {
             return 0;
         }
-
-        //TODO do all the sanity checks
-        // If the {@link BookEntry#COLUMN_BOOK_AUTHOR} key is present,
-        // check that the name value is not null.
-        if (values.containsKey(BookEntry.COLUMN_BOOK_AUTHOR)) {
-            String name = values.getAsString(BookEntry.COLUMN_BOOK_AUTHOR);
-            if (name == null) {
-                throw new IllegalArgumentException("Book requires author");
-            }
-        }
-
-
-        // Otherwise, get writable database to update the data
         SQLiteDatabase db = bookDbHelper.getWritableDatabase();
 
         // Returns the number of database rows affected by the update statement
@@ -225,11 +151,11 @@ public class BookProvider extends ContentProvider {
         return rowsUpdated;
     }
 
+    //Delete the book
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
 
         SQLiteDatabase db = bookDbHelper.getWritableDatabase();
-
         // Track the number of rows that were deleted
         int rowsDeleted;
 
