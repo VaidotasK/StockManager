@@ -1,72 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/img_bookshelf_background">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:padding="@dimen/padOrMar_XXL">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <LinearLayout style="@style/LinearLayoutBasic">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Product Details" />
+                style="@style/TextViewTitles"
+                android:text="@string/category_product_details" />
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="@dimen/padOrMar_0"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="2"
                 android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/editor_author_edit_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Author" />
+                    style="@style/EditTextViewBasic"
+                    android:hint="@string/hint_text_author" />
 
                 <EditText
                     android:id="@+id/editor_product_name_edit_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Product name" />
+                    style="@style/EditTextViewBasic"
+                    android:hint="@string/hint_text_product_name" />
 
                 <EditText
                     android:id="@+id/editor_year_edit_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Publication year"
+                    style="@style/EditTextViewBasic"
+                    android:hint="@string/hint_text_publication_year"
                     android:inputType="number" />
 
                 <EditText
                     android:id="@+id/editor_language_edit_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Language" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Type:" />
-
-                    <Spinner
-                        android:id="@+id/editor_type_spinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:spinnerMode="dropdown" />
-                </LinearLayout>
+                    style="@style/EditTextViewBasic"
+                    android:hint="@string/hint_text_language" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -75,96 +50,90 @@
 
                     <Button
                         android:id="@+id/decrement_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="-" />
+                        style="@style/ButtonQuantityChange"
+                        android:onClick="decreaseProductQuantity"
+                        android:text="@string/decrement_sign" />
 
                     <EditText
                         android:id="@+id/editor_quantity_edit_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="Quantity"
-                        android:inputType="number" />
+                        style="@style/EditTextViewBasic"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:hint="@string/hint_text_quantity"
+                        android:inputType="number"
+                        android:paddingRight="@dimen/padOrMar_M" />
 
                     <Button
                         android:id="@+id/increment_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="+" />
+                        style="@style/ButtonQuantityChange"
+                        android:onClick="incrementProductQuantity"
+                        android:text="@string/increment_sign" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <LinearLayout style="@style/LinearLayoutBasic">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Price" />
+                style="@style/TextViewTitles"
+                android:text="@string/category_type" />
+
+            <Spinner
+                android:id="@+id/editor_type_spinner"
+                style="@style/mySpinnerItemStyle" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/LinearLayoutBasic">
+
+            <TextView
+                style="@style/TextViewTitles"
+                android:text="@string/category_price" />
 
             <EditText
                 android:id="@+id/editor_price_edit_text"
-                android:layout_width="0dp"
+                style="@style/EditTextViewBasic"
+                android:layout_width="@dimen/padOrMar_0"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:hint="Price"
+                android:layout_weight="2"
+                android:hint="@string/hint_text_price"
                 android:inputType="number" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <LinearLayout style="@style/LinearLayoutBasic">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Availability" />
+                style="@style/TextViewTitles"
+                android:text="@string/category_availability" />
 
             <Spinner
                 android:id="@+id/editor_availability_spinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:spinnerMode="dropdown" />
+                style="@style/mySpinnerItemStyle" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <LinearLayout style="@style/LinearLayoutBasic">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Supplier details" />
+                style="@style/TextViewTitles"
+                android:text="@string/category_supplier_details" />
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="@dimen/padOrMar_0"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="2"
                 android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/editor_supplier_name_edit_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Supplier name" />
+                    style="@style/EditTextViewBasic"
+                    android:hint="@string/hint_text_supplier_name" />
 
                 <EditText
                     android:id="@+id/editor_supplier_phone_edit_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Supplier phone number"
-                    android:inputType="phone" />
+                    style="@style/EditTextViewBasic"
+                    android:hint="@string/hint_text_supplier_phone_number"
+                    android:inputType="number" />
 
             </LinearLayout>
         </LinearLayout>
@@ -173,7 +142,11 @@
             android:id="@+id/call_supplier_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Call Supplier" />
+            android:layout_marginTop="@dimen/padOrMar_M"
+            android:background="@color/button_background"
+            android:onClick="makePhoneCall"
+            android:padding="@dimen/padOrMar_M"
+            android:text="@string/button_text_call_supplier" />
 
     </LinearLayout>
 </ScrollView>
